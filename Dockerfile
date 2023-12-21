@@ -4,9 +4,12 @@ FROM wordpress:5.3.2-apache
 
 # Install PHP 7.4 and additional dependencies
 RUN apt-get update && \
-    apt-get install -y php7.4 magic-wormhole && \
+    apt-get install -y php7.4 libapache2-mod-php7.4 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Install additional dependencies
+RUN apt-get update && apt-get install -y magic-wormhole
 
 # Set user and ownership
 RUN usermod -s /bin/bash www-data

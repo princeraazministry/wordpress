@@ -2,8 +2,9 @@
 # https://hub.docker.com/_/wordpress
 FROM wordpress:5.3.2-apache
 
-# Update PHP version to 7.4
-RUN sed -i 's/stretch/buster/g' /etc/apt/sources.list && \
+# Install PHP 7.4
+RUN apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository ppa:ondrej/php && \
     apt-get update && \
     apt-get install -y php7.4 && \
     apt-get clean && \
